@@ -1,0 +1,1 @@
+DELETE FROM poke_types WHERE poke_id=? AND poke_type=?;

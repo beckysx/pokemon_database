@@ -1,0 +1,1 @@
+DELETE FROM known_moves WHERE poke_id=? AND move_name=?;
