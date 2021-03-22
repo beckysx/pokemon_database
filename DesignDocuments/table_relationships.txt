@@ -1,0 +1,10 @@
+﻿; DROP TABLE 
+Jacob Ballard, Xu Song, Noah Feld, Malachi Beerram
+CSC 362
+William Bailey
+8 September 2020
+Design 3 - Table Relationships
+The relationship between the Pokemon table and the Move table is inherently many-to-many (M:N): one pokemon can learn many moves, and one move can be learned by many pokemon. To account for this, we added a linking table called LearnHistory. Both the Pokemon table and the Move table have a one-to-many relationship (1:M) with LearnHistory, but are not related to each other. LearnHistory consists of two foreign keys: PokeID (the primary key of the Pokemon table), and MoveID (the primary key of the Move table).
+        The manner of participation between the Pokemon and Move tables is optional, both ways. A specific pokemon does not need to have learned a move from the move tutor, and a specific move does not need to have been taught at least once to be in the database.
+        The degree of participation is 0 or more (0:N) in both directions. A pokemon can learn any number of moves from the move tutor, since there is no upper limit. And since the relationship is optional, the lower limit is 0. Similarly, a move can be learned by any number of pokemon, and does not have to be learned by any pokemon to be in the database, making the degree also 0:N.
+We are using the “DENY” deletion rule for both pokemon and moves. Doing this will allow us to mark pokemon as inactive while also keeping track of how popular a move is (rather than deleting the record of the pokemon ever learning it). Marking a move as inactive will also let us keep track of how many times a pokemon has been taught a move.

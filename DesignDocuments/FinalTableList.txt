@@ -1,0 +1,1083 @@
+<<<<<<< HEAD
+Initial message
+
+
+
+Relevant Components:
+- Pokemon (ID, name, type, trainer)
+- Moves (ID, name, type, temporality)
+- Schedule (ID, move)
+
+Pokemon: Table
+ - PokeID        (PK)
+ - PokeName
+ - PokeType
+
+Move: Table
+ - MoveID        (PK)
+ - Move Name
+ - MoveType
+ - MoveTime
+ - HM?
+
+ Linking:
+
+ - PokeID
+ - MoveID
+
+------------------------------------------------------------
+            Final Table List
+
+Name            Type           Description
+
+Pokemon         Data           Pokemon table contains the name of the pokmon, the id as primary key to identify each one of them 
+                               when the name is same. Type of each pokmon is also provided for avoiding wasting time during teaching
+                               if the type is not matching with the move type.
+
+Move            Data           The moves Pokemon are able to execute, information on the type of move, when the move was taught, 
+                               and if it is special to any specimen.
+
+LearnHistory    Linking        Contains the history of all teachings, linking move ID's to pokemon ID's to document popularity and prevent redundancy.
+
+
+---------------------------------------------------------------
+                        Pokemon Table 
+Field Name:                PokeID
+Specification Type:        Replica
+Parent Table:              Pokemon 
+Label:                     poke# 
+Source Specification: 
+Shared By:                 Move & LearnHistory 
+Aliases:               
+Description:               A unique number for Pokemon use to identify every different Pokemon the move
+                           tutor have taught, teaching or going to teach.
+
+
+PHYSICAL ELEMENTS
+
+Data Type:                 Numeric 
+Length:                    4 
+Decimal Places:        
+Input Mask:                #### 
+Display Format:            #### 
+Character Support:         Numbers (0-9) 
+
+
+LOGICAL ELEMENTS
+
+Key Type:                 Primary
+
+
+Key Structure:            Simple
+
+Uniqueness:               Unique
+
+Null Support:             No nulls 
+
+Values Entered By:        System 
+
+Required Value:           Yes 
+
+Default Value:     _ 
+
+Range of Values:          0000~9999 
+
+Edit Rule:
+  Enter now, edits allowed:       _ 
+  Enter now, edits not allowed:   Yes
+  Enter later, edits allowed:     _ 
+  Enter later, edits not allowed: _ 
+  Not determined at this time:    _ 
+
+Comparisons Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                =    Yes 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+  Other Fields: _
+                ALL  _ 
+                =    _ 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                =    Yes 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+Operations Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Other Fields: _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+NOTES:
+
+Field Name:          PokeName
+
+Specification Type:  Unique
+
+Parent Table:         Pokemon 
+Label:                PokeName 
+Source Specification: 
+Shared By:             
+Aliases:               
+Description:          The name of each Pokemon
+
+
+PHYSICAL ELEMENTS
+
+Data Type:            VAR/VARCHAR 
+Length:               32 
+Decimal Places:       N/A 
+Input Mask:           A*32 
+Display Format:       A*32 
+Character Support: LETTERS (A-Z) 
+
+
+LOGICAL ELEMENTS
+
+Key Type:      N/A
+
+
+Key Structure: N/A
+
+Uniqueness:    NON-Unique
+
+Null Support:  No nulls 
+
+Values Entered By: User 
+
+Required Value:  Yes 
+
+Default Value:     _ 
+
+Range of Values:    
+
+Edit Rule:
+  Enter now, edits allowed:       Yes 
+  Enter now, edits not allowed:    
+  Enter later, edits allowed:     _ 
+  Enter later, edits not allowed: _ 
+  Not determined at this time:    _ 
+
+Comparisons Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                =    Y 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+  Other Fields: _
+                ALL  _ 
+                =    _ 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                =    _ 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+Operations Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Other Fields: _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+NOTES:
+
+GENERAL ELEMENTS
+
+Field Name:           PokeType
+
+Specification Type:
+  Unique:  CHECK 
+  Generic: _ 
+  Replica: _ 
+Parent Table:         Pokemon 
+Label:                PokeType 
+Source Specification: _ 
+Shared By:            _ 
+Aliases:              _ 
+Description:          A pokemon's type, determining which moves they can learn.
+
+
+PHYSICAL ELEMENTS
+
+Data Type:            VARCHAR
+Length:               32
+Decimal Places:       _
+Input Mask:           A x 32 
+Display Format:       A x 32
+Character Support:
+  Letters (A-Z):      CHECK 
+  Numbers (0-9):      _ 
+  Keyboard (.,/$#%):  _ 
+  Special (©®™Σπ):    _ 
+
+
+LOGICAL ELEMENTS
+
+Key Type:      Non:        CHECK 
+               Primary:    _ 
+               Foreign:    _ 
+               Alternate:  _ 
+
+Key Structure: Simple:     _ 
+               Composite:  _ 
+
+Uniqueness:    Non-unique: _ 
+               Unique:     CHECK 
+
+Null Support:  Nulls OK:   _ 
+               No nulls:   CHECK 
+
+Values Entered By: User:   CHECK 
+                   System: CHECK 
+
+Required Value:    No:     _ 
+                   Yes:    CHECK 
+
+Default Value:     _ 
+
+Range of Values:   _ 
+
+Edit Rule:
+  Enter now, edits allowed:       SURE 
+  Enter now, edits not allowed:   _ 
+  Enter later, edits allowed:     _ 
+  Enter later, edits not allowed: _ 
+  Not determined at this time:    _ 
+
+Comparisons Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                =    YES
+                >    _ 
+                >=   _ 
+                !=   YES 
+                <    _ 
+                <=   _ 
+
+  Other Fields: _
+                ALL  _ 
+                =    YES 
+                >    _ 
+                >=   _ 
+                !=   YES 
+                <    _ 
+                <=   _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                =    _ 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+Operations Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Other Fields: _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+NOTES: none
+
+--- 
+
+
+---------------------------------------------------------------
+                        Move Table
+FIELD SPECIFICATIONS
+
+GENERAL ELEMENTS
+
+Field Name:           MoveID 
+
+Specification Type:
+  Unique:  _ 
+  Generic: _ 
+  Replica: _ 
+Parent Table:         Move 
+Label:                Moves 
+Source Specification: _ 
+Shared By:            _ 
+Aliases:              _ 
+Description:          Id of the move
+
+
+PHYSICAL ELEMENTS
+
+Data Type:            CHAR/VARCHAR 
+Length:               32 
+Decimal Places:       _ 
+Input Mask:           _ 
+Display Format:       _ 
+Character Support:
+  Letters (A-Z):      True 
+  Numbers (0-9):      _ 
+  Keyboard (.,/$#%):  _ 
+  Special (©®™Σπ):    _ 
+
+
+LOGICAL ELEMENTS
+
+Key Type:      Non:        True 
+               Primary:    _ 
+               Foreign:    _ 
+               Alternate:  _ 
+
+Key Structure: Simple:     _ 
+               Composite:  _ 
+
+Uniqueness:    Non-unique: _ 
+               Unique:     True 
+
+Null Support:  Nulls OK:   _ 
+               No nulls:   True 
+
+Values Entered By: User:   True 
+                   System: _ 
+
+Required Value:    No:     _ 
+                   Yes:    True 
+
+Default Value:     _ 
+
+Range of Values:   _ 
+
+Edit Rule:
+  Enter now, edits allowed:       True 
+  Enter now, edits not allowed:   _ 
+  Enter later, edits allowed:     _ 
+  Enter later, edits not allowed: _ 
+  Not determined at this time:    _ 
+
+Comparisons Allowed:
+  Same Field:   True 
+                ALL  _ 
+                =    True 
+                >    _ 
+                >=   _ 
+                !=   True 
+                <    _ 
+                <=   _ 
+
+  Other Fields: _
+                ALL  _ 
+                =    _ 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+  Value Expr.:  True 
+                ALL  _ 
+                =    True 
+                >    _ 
+                >=   _ 
+                !=   True 
+                <    _ 
+                <=   _ 
+
+Operations Allowed:
+  Same Field:   True 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    True 
+
+  Other Fields: _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+NOTES:
+
+---
+FIELD SPECIFICATIONS
+
+GENERAL ELEMENTS
+
+Field Name: MoveName            
+
+Specification Type:
+  Unique:  _
+  Generic: True 
+  Replica: _ 
+Parent Table:         Move 
+Label:                Moves 
+Source Specification: _ 
+Shared By:            _ 
+Aliases:              _ 
+Description:          The Name of that Move 
+
+
+PHYSICAL ELEMENTS
+
+Data Type:            Char/VarChar 
+Length:               32 
+Decimal Places:       _ 
+Input Mask:           _ 
+Display Format:       _ 
+Character Support:
+  Letters (A-Z):      True 
+  Numbers (0-9):      _ 
+  Keyboard (.,/$#%):  _ 
+  Special (©®™Σπ):    _ 
+
+
+LOGICAL ELEMENTS
+
+Key Type:      Non:        True 
+               Primary:    _ 
+               Foreign:    _ 
+               Alternate:  _ 
+
+Key Structure: Simple:     _ 
+               Composite:  _ 
+
+Uniqueness:    Non-unique: True 
+               Unique:     _ 
+
+Null Support:  Nulls OK:   _ 
+               No nulls:   Ture 
+
+Values Entered By: User:   True 
+                   System: _ 
+
+Required Value:    No:     Ture 
+                   Yes:    _ 
+
+Default Value:     _ 
+
+Range of Values:   _ 
+
+Edit Rule:
+  Enter now, edits allowed:       True 
+  Enter now, edits not allowed:   _ 
+  Enter later, edits allowed:     _ 
+  Enter later, edits not allowed: _ 
+  Not determined at this time:    _ 
+
+Comparisons Allowed:
+  Same Field:   True 
+                ALL  _ 
+                =    True 
+                >    _ 
+                >=   _ 
+                !=   True 
+                <    _ 
+                <=   _ 
+
+  Other Fields: _
+                ALL  _ 
+                =    _ 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                =    True 
+                >    _ 
+                >=   _ 
+                !=   True 
+                <    _ 
+                <=   _ 
+
+Operations Allowed:
+  Same Field:   True 
+                ALL  True 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Other Fields: _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+NOTES:
+
+FIELD SPECIFICATIONS
+
+GENERAL ELEMENTS
+
+Field Name:           MoveType
+
+Specification Type:
+  Unique:  CHECK 
+  Generic: _ 
+  Replica: _ 
+Parent Table:         Move
+Label:                MoveType
+Source Specification: _ 
+Shared By:            _ 
+Aliases:              _ 
+Description:          A move's type, determining which pokemon can learn it.
+
+
+PHYSICAL ELEMENTS
+
+Data Type:            VARCHAR
+Length:               32
+Decimal Places:       _
+Input Mask:           A x 32 
+Display Format:       A x 32
+Character Support:
+  Letters (A-Z):      CHECK 
+  Numbers (0-9):      _ 
+  Keyboard (.,/$#%):  _ 
+  Special (©®™Σπ):    _ 
+
+
+LOGICAL ELEMENTS
+
+Key Type:      Non:        CHECK 
+               Primary:    _ 
+               Foreign:    _ 
+               Alternate:  _ 
+
+Key Structure: Simple:     _ 
+               Composite:  _ 
+
+Uniqueness:    Non-unique: _ 
+               Unique:     CHECK 
+
+Null Support:  Nulls OK:   _ 
+               No nulls:   CHECK 
+
+Values Entered By: User:   CHECK 
+                   System: CHECK 
+
+Required Value:    No:     _ 
+                   Yes:    CHECK 
+
+Default Value:     _ 
+
+Range of Values:   _ 
+
+Edit Rule:
+  Enter now, edits allowed:       SURE 
+  Enter now, edits not allowed:   _ 
+  Enter later, edits allowed:     _ 
+  Enter later, edits not allowed: _ 
+  Not determined at this time:    _ 
+
+Comparisons Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                =    YES
+                >    _ 
+                >=   _ 
+                !=   YES 
+                <    _ 
+                <=   _ 
+
+  Other Fields: _
+                ALL  _ 
+                =    YES 
+                >    _ 
+                >=   _ 
+                !=   YES 
+                <    _ 
+                <=   _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                =    _ 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+Operations Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Other Fields: _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+NOTES:
+
+---
+
+Field Name:  MoveTime
+
+Specification Type:
+  Unique:  YES
+Parent Table:   Move Table
+Label:                Time
+Source Specification: _ 
+Shared By:            Move
+Aliases:              _ 
+Description:          When a move is taught: past, present, or future.
+
+
+PHYSICAL ELEMENTS
+
+Data Type:            CHAR/VARCHAR
+Length:               32
+Decimal Places:    N/A 
+Input Mask:           Ax32
+Display Format:       Ax32
+Character Support:
+  Letters (A-Z):      YES
+  Numbers (0-9):      NO
+  Keyboard (.,/$#%):  NO
+  Special (©®™Σπ):    NO
+
+
+LOGICAL ELEMENTS
+
+Key Type:      Non:        YES
+
+Uniqueness:    Non-unique: _ 
+               Unique:     YES
+
+Null Support:  Nulls OK:   _ 
+               No nulls:   YES
+
+Values Entered By: User:   YES 
+                   System: 
+
+Required Value:    No:     _ 
+                   Yes:    YES
+
+Default Value:     N/A
+
+Range of Values:   {Past, Present, Future}
+
+Edit Rule:
+  Enter now, edits allowed:       _ 
+  Enter now, edits not allowed:   YES
+  Enter later, edits allowed:     _ 
+  Enter later, edits not allowed: _ 
+  Not determined at this time:    _ 
+
+Comparisons Allowed:
+  Same Field:   YES
+                ALL : YES
+                =    _ YES
+                >    _ YES
+                >=   _ YES
+                !=   _ YES
+                <    _ YES
+                <=   _ YES
+
+---
+
+Field Name:           HM
+
+Specification Type:
+  Unique:  YES
+Parent Table:         Move
+Label:                Hidden Move
+Source Specification: _ 
+Shared By:            Move
+Aliases:              
+Description:    Boolean for whether a move is a hidden move. 
+
+
+PHYSICAL ELEMENTS
+
+Data Type:            VAR/VARCHAR
+Length:               32
+Decimal Places:       N/A
+Input Mask:           N/A
+Display Format:       N/A
+Character Support:
+  Letters (A-Z):      _ 
+  Numbers (0-9):      YES
+  Keyboard (.,/$#%):  _ 
+  Special (©®™Σπ):    _ 
+
+
+LOGICAL ELEMENTS
+
+Key Type:      Non:        YES
+
+
+Key Structure: Simple:     _ 
+               Composite:  _ 
+
+Uniqueness:    Non-unique: _ 
+               Unique:     YES
+
+Null Support:  Nulls OK:   _ 
+               No nulls:   YES
+
+Values Entered By: User:   _ 
+                   System: YES
+
+Required Value:    No:     _ 
+                   Yes:    YES
+
+Default Value:     0
+
+Range of Values:   { 0, 1}
+
+Edit Rule:
+  Enter now, edits allowed:       YES
+  Enter now, edits not allowed:   _ 
+  Enter later, edits allowed:     _ 
+  Enter later, edits not allowed: _ 
+  Not determined at this time:    _ 
+
+Comparisons Allowed:
+  Same Field:   YES
+                ALL  YES
+                =    YES
+                >    _ 
+                >=   _ 
+                !=   YES
+                <    _ 
+                <=   _ 
+
+NOTES:
+
+
+---------------------------------------------------------------
+                        Linking Table
+
+Field Name: PokeID
+
+Specification Type:
+  Unique:  _
+  Generic: _ 
+  Replica: CHECK 
+Parent Table:         LearnHistory
+Label:                PokeID
+Source Specification: Replicates PokeID PK in Pokemon Table 
+Shared By:            Pokemon Table 
+Aliases:              _ 
+Description:          A pokemon's unique identification number.
+
+
+PHYSICAL ELEMENTS
+
+Data Type:            INT
+Length:               4
+Decimal Places:       _
+Input Mask:           #### 
+Display Format:       ####
+Character Support:
+  Letters (A-Z):      _ 
+  Numbers (0-9):      CHECK
+  Keyboard (.,/$#%):  _ 
+  Special (©®™Σπ):    _ 
+
+
+LOGICAL ELEMENTS
+
+Key Type:      Non:        _
+               Primary:    _ 
+               Foreign:    CHECK
+               Alternate:  _ 
+
+Key Structure: Simple:     CHECK 
+               Composite:  _ 
+
+Uniqueness:    Non-unique: CHECK
+               Unique:     _ 
+
+Null Support:  Nulls OK:   _ 
+               No nulls:   CHECK 
+
+Values Entered By: User:   CHECK 
+                   System: CHECK 
+
+Required Value:    No:     _ 
+                   Yes:    CHECK 
+
+Default Value:     _ 
+
+Range of Values:   0000-9999 
+
+Edit Rule:
+  Enter now, edits allowed:       SURE 
+  Enter now, edits not allowed:   _ 
+  Enter later, edits allowed:     _ 
+  Enter later, edits not allowed: _ 
+  Not determined at this time:    _ 
+
+Comparisons Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                =    YES
+                >    _ 
+                >=   _ 
+                !=   YES 
+                <    _ 
+                <=   _ 
+
+  Other Fields: _
+                ALL  _ 
+                =    YES 
+                >    _ 
+                >=   _ 
+                !=   YES 
+                <    _ 
+                <=   _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                =    _ 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+Operations Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Other Fields: _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+NOTES:
+
+Field Name: MoveID
+
+Specification Type:
+  Unique:  _
+  Generic: _ 
+  Replica: CHECK 
+Parent Table:         LearnHistory
+Label:                MoveID
+Source Specification: Replicates MoveID PK in Move Table 
+Shared By:            Move Table 
+Aliases:              _ 
+Description:          A move's unique identification number.
+
+
+PHYSICAL ELEMENTS
+
+Data Type:            INT
+Length:               4
+Decimal Places:       _
+Input Mask:           #### 
+Display Format:       ####
+Character Support:
+  Letters (A-Z):      _ 
+  Numbers (0-9):      CHECK
+  Keyboard (.,/$#%):  _ 
+  Special (©®™Σπ):    _ 
+
+
+LOGICAL ELEMENTS
+
+Key Type:      Non:        _
+               Primary:    _ 
+               Foreign:    CHECK
+               Alternate:  _ 
+
+Key Structure: Simple:     CHECK 
+               Composite:  _ 
+
+Uniqueness:    Non-unique: CHECK
+               Unique:     _ 
+
+Null Support:  Nulls OK:   _ 
+               No nulls:   CHECK 
+
+Values Entered By: User:   CHECK 
+                   System: CHECK 
+
+Required Value:    No:     _ 
+                   Yes:    CHECK 
+
+Default Value:     _ 
+
+Range of Values:   0000-9999 
+
+Edit Rule:
+  Enter now, edits allowed:       SURE 
+  Enter now, edits not allowed:   _ 
+  Enter later, edits allowed:     _ 
+  Enter later, edits not allowed: _ 
+  Not determined at this time:    _ 
+
+Comparisons Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                =    YES
+                >    _ 
+                >=   _ 
+                !=   YES 
+                <    _ 
+                <=   _ 
+
+  Other Fields: _
+                ALL  _ 
+                =    YES 
+                >    _ 
+                >=   _ 
+                !=   YES 
+                <    _ 
+                <=   _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                =    _ 
+                >    _ 
+                >=   _ 
+                !=   _ 
+                <    _ 
+                <=   _ 
+
+Operations Allowed:
+  Same Field:   _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Other Fields: _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+  Value Expr.:  _ 
+                ALL  _ 
+                +    _ 
+                -    _ 
+                *    _ 
+                /    _ 
+
+NOTES:
+=======
+Initial message
+>>>>>>> 2b0fbb91032c255f658e0df6ed3eb432426de4f1

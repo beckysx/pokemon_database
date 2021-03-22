@@ -1,0 +1,17 @@
+Jacob Ballard, Noah Feld, Xu Song, Malachi Beerram
+Design 4 - Business Rules
+
+
+Four business rules have been established.  Each pokemon has a type; all pokemon can learn normal type moves and moves that have the same type as the pokemon.  This will be handled by checking the type of a move before its record is entered into learn_history and/or known_moves. The system must check that the move_type field of the table moves is either Normal type, or equivalent to the type of the pokemon it is being entered with. If the criteria is met, the entry containing the move is entered normally. If not, the entry must be denied, not entered, and this must be communicated to the user that entered it.
+
+
+
+No pokemon can unlearn their hidden move.  Upon a pokemon trying to learn more than four moves, one move must be deleted; this move cannot be the hidden move.  This is implemented by checking the move associated with a pokemon in the known_moves linking table before deleting a move and replacing it.  A move can only be deleted if the moves.hm field is false.  This field being true indicates a move is a hidden move and will forever remain with a pokemon meaning deleting this move will be denied.
+
+
+
+A pokemon can only know 4 moves at most but at least 1 move at one given time. This means that for any given pokemon in the Pokemon table, you will find at least one and at most four records in the known_moves table associated with that pokemon. This sets type of Participation as Mandatory meaning that when there is one Pokemon in the Pokemon table, there must be at least a record exist in the known_moves. The system will check the number of records in the known_moves table when a pokemon wants to learn a new move or forget an old move. The deletion must be denied when there’s only one record in known_moves related to that pokemon and the entry must be denied when there are already 4 records in the known_moves related to that pokemon.
+
+
+
+Pokemon can only learn moves that are being currently taught. This means that before a move can be added to that Pokemon it must be checked if it's being currently taught. This is generally going to affect the database and it's going to be reliant on the relationship between moves and the Pokemon. The table affected is the moves table of the database and the specific field affected will be the move_time which is observed in order to ensure that the move is current. If move_time is not regulated, Trainers can learn any move at any time which will negate the necessity of the teaching schedule. The point of this is to make sure that there is scarcity between certain types of moves, Trainers will have to pay attention to the schedule to make sure they are present to learn the moves that they are seeking.

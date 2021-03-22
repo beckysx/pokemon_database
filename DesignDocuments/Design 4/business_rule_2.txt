@@ -1,0 +1,53 @@
+BUSINESS RULE SPECIFICATIONS
+
+RULE INFORMATION
+
+Statement:  _ No pokemon can unlearn a hidden move.
+
+Constraint: _ The known_moves linking table will have a Pokemon and associated Moves that will contain a boolean Moves.hm
+
+Type:     Database Oriented:     _ X
+          Application Oriented   _ 
+
+Category: Field Specific:        _ X
+          Relationship Specific: _ 
+
+Test On:  Insert:                _ X
+          Delete:                _ X
+          Update:                _ X
+
+
+STRUCTURES AFFECTED
+
+Field Names: _ Moves.hm
+
+Table Names: _ Moves, Pokemon, Known_moves
+
+
+FIELD ELEMENTS AFFECTED
+
+Physical Elements: Data Type:           _ X - Boolean
+                   Length:              _ 
+                   Decimal Places:      _ 
+                   Character Support:   _ 
+                   Input Mask:          _ 
+                   Display Format:      _ 
+
+Logical Elements:  Key Type:            _ 
+                   Key Structure:       _ 
+                   Uniqueness:          _ 
+                   Null Support:        _ 
+                   Values Entered By:   _ 
+                   Default Value:       _ 
+                   Range of Values:     _ 
+                   Comparisons Allowed: _ 
+                   Operations Allowed:  _ 
+                   Edit Rule:           _ 
+
+
+ACTION TAKEN
+
+_ Check that Moves.hm is a boolean and before deleting a move check that said move is not a hidden move.
+
+
+NOTES: _
